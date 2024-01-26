@@ -1,14 +1,17 @@
 package com.alertbot;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-
-public class BithumbParsing {
-    public static void main(String[] args) throws IOException {
+@Slf4j
+@Service
+public class BithumbParsingService {
+    public void parseBithumb() throws IOException {
         Document doc = Jsoup.connect("https://feed.bithumb.com/notice")
                 .timeout(6 * 1000)
                 .get();
