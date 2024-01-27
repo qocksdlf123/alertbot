@@ -30,6 +30,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// jsoup HTML parser library @ https://jsoup.org/
 	implementation 'org.jsoup:jsoup:1.17.2'
+	//mariadb
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
 }
 
 tasks.named('test') {
