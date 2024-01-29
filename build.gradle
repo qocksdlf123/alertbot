@@ -32,6 +32,8 @@ dependencies {
 	implementation 'org.jsoup:jsoup:1.17.2'
 	//mariadb
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
+	// Selenium
+	implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
 }
 
 tasks.named('test') {

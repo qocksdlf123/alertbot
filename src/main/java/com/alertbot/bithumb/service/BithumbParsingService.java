@@ -1,9 +1,8 @@
 package com.alertbot.bithumb.service;
 
-import com.alertbot.bithumb.dao.NoticeRepository;
-import com.alertbot.bithumb.domain.Notice;
+import com.alertbot.bithumb.dao.BithumbNoticeRepository;
+import com.alertbot.bithumb.domain.BithumbNotice;
 import com.alertbot.kakao.KakaoMSGService;
-import com.alertbot.kakao.dto.ReissueResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -21,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BithumbParsingService {
 
-    private final NoticeRepository noticeRepository;
+    private final BithumbNoticeRepository noticeRepository;
 
     private final KakaoMSGService kakaoMSGService;
 
@@ -36,23 +35,25 @@ public class BithumbParsingService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Elements elements = doc.select("li > a");
+        Elements elements = doc.select("main > ul > li > a");
+
+        Optional<BithumbNotice> topNotice = noticeRepository.findTopByOrderByIdDesc();
+        Integer topNoticeNumber;
+        if(topNotice.isPresent()){
+            topNoticeNumber = topNotice.get().getNoticeNumber();
+        }else{
+            topNoticeNumber = 0;
+        }
 
         for (Element element: elements) {
-            System.out.println(element);
+//            System.out.println(element);
             Elements spans = element.select("span");
             String title = spans.text();
-            Optional<Notice> topNotice = noticeRepository.findTopByOrderByIdDesc();
-            String topTitle;
-            if(topNotice.isPresent()){
-                topTitle = topNotice.get().getTitle();
-            }else{
-                topTitle = "";
-            }
 
-            if(!title.equals(topTitle) &&(title.contains("마켓 추가") || title.contains("입출금"))){
-                String noticeNumber = element.toString().substring(17,24);
-                Notice notice = Notice.builder()
+            Integer noticeNumber = Integer.parseInt(element.toString().substring(17,24));
+            if(noticeNumber > topNoticeNumber  &&(title.contains("마켓 추가") || title.contains("입출금"))){
+                topNoticeNumber = noticeNumber;
+                BithumbNotice notice = BithumbNotice.builder()
                         .title(title)
                         .noticeNumber(noticeNumber)
                         .build();
