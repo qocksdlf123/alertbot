@@ -19,7 +19,7 @@ public class AlertbotApplication {
 		KakaoMSGService kakaoMSGService = context.getBean(KakaoMSGService.class);
 
 //		bithumbParsingService.parseBithumb();
-		upbitParsingService.parseUpbit();
+		upbitParsingService.crawlUpbitNotices();
 //		kakaoMSGService.sendMeMSG("빗썸","https://feed.bithumb.com/notice/1644422?list_params=page%3D2","3y4Eo4Syn3HqTQ-hqhKofGrQSW8h8W3sIcQKKwzTAAABjUSRvn7okopMIboAuA");
 //		kakaoMSGService.accessTokenReissue();
 
