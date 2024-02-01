@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -27,6 +28,8 @@ public class UpbitParsingService {
     private final UpbitNoticeRepository noticeRepository;
 
     private final KakaoMSGService kakaoMSGService;
+
+    @Scheduled(cron = "0 */5 * * * *") //5분마다 실행
     public void crawlUpbitNotices() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
