@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface UpbitNoticeRepository extends JpaRepository<UpbitNotice, Integer> {
-    @Query("SELECT n FROM UpbitNotice n WHERE n.noticeId = (SELECT MAX(n.noticeId) FROM UpbitNotice e)")
+    @Query("SELECT n FROM UpbitNotice n WHERE n.noticeId = (SELECT MAX(e.noticeId) FROM UpbitNotice e)")
     Optional<UpbitNotice> findTopByOrderByIdDesc();
 
 }

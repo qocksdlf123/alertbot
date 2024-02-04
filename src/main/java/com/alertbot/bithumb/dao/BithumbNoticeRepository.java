@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface BithumbNoticeRepository extends JpaRepository<BithumbNotice, Integer> {
-    @Query("SELECT n FROM BithumbNotice n WHERE n.noticeId = (SELECT MAX(n.noticeId) FROM BithumbNotice e)")
+    @Query("SELECT n FROM BithumbNotice n WHERE n.noticeId = (SELECT MAX(e.noticeId) FROM BithumbNotice e)")
     Optional<BithumbNotice> findTopByOrderByIdDesc();
 
 }
