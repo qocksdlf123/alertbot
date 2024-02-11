@@ -4,6 +4,7 @@ import com.alertbot.kakao.KakaoMSGService;
 import com.alertbot.upbit.dao.UpbitNoticeRepository;
 import com.alertbot.upbit.domain.UpbitNotice;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -29,9 +30,13 @@ public class UpbitParsingService {
 
     private final KakaoMSGService kakaoMSGService;
 
-    @Scheduled(cron = "0 */5 * * * *") //5분마다 실행
-    public void crawlUpbitNotices() {
+
+    @PostConstruct
+    public void init(){
         WebDriverManager.chromedriver().setup();
+    }
+    @Scheduled(cron = "0 */10 * * * *") //10분마다 실행
+    public void crawlUpbitNotices() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--headless");
