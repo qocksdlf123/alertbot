@@ -61,8 +61,8 @@ dependencies {
 	// 기타 테스트 관련 종속성...
 
 // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v114
-	implementation group: 'org.seleniumhq.selenium', name: 'selenium-devtools-v114', version: '4.12.1'
-
+//	implementation group: 'org.seleniumhq.selenium', name: 'selenium-devtools-v114', version: '4.12.1'
+	implementation 'org.seleniumhq.selenium:selenium-devtools-v121:4.14.1'
 	// (버전 번호와 Selenium 버전은 예시이며, 실제 호환되는 버전을 찾아야 합니다.)
 }
 tasks.named('test') {
