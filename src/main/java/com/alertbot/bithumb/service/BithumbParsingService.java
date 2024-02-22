@@ -9,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class BithumbParsingService {
     private final KakaoMSGService kakaoMSGService;
 
     @Scheduled(cron = "0 */5 * * * *") //5분마다 실행
+    @Async
 //    @Scheduled(cron = "")
     public void parseBithumb() {
         Document doc = null;
@@ -35,7 +37,8 @@ public class BithumbParsingService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Elements elements = doc.select("main > ul > li > a");
+        Elements elements = doc.select("div>div> ul > li > a");
+//        Elements elements = doc.select(".ContentList_notice-list__link__VKbdP");
 
         Optional<BithumbNotice> topNotice = noticeRepository.findTopByOrderByIdDesc();
         Integer topNoticeNumber;
@@ -44,8 +47,9 @@ public class BithumbParsingService {
         }else{
             topNoticeNumber = 0;
         }
-
+        log.info("탑 넘버 :{} ",topNoticeNumber);
         for (Element element: elements) {
+            log.info("출력 :{}",element);
 //            System.out.println(element);
             Elements spans = element.select("span");
             String title = spans.text();

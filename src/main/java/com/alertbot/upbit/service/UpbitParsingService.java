@@ -14,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +34,10 @@ public class UpbitParsingService {
 
     @PostConstruct
     public void init(){
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().driverVersion("121.0.6167.85").setup();
     }
     @Scheduled(cron = "0 */10 * * * *") //10분마다 실행
+    @Async
     public void crawlUpbitNotices() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -85,6 +87,5 @@ public class UpbitParsingService {
         }
             // WebDriver 종료
             driver.quit();
-
     }
 }
