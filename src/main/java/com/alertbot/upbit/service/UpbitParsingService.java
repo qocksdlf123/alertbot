@@ -49,8 +49,8 @@ public class UpbitParsingService {
 
 //        // Upbit 공지사항 페이지 접속
         driver.get("https://upbit.com/service_center/notice");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(60 * 1000));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".css-12ct4qh")));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(60 * 1000));
+//        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".css-12ct4qh")));
         // 공지사항 목록을 가져옵니다.
         List<WebElement> elements = driver.findElements(By.cssSelector(".css-12ct4qh"));
         Optional<UpbitNotice> topNotice = noticeRepository.findTopByOrderByIdDesc();

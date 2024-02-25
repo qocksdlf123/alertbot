@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -63,7 +64,6 @@ public class KakaoMSGService {
         System.out.println(response);
 
     }
-
     public String accessTokenReissue(){
         ObjectMapper objectMapper = new ObjectMapper();
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
