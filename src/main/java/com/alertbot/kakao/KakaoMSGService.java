@@ -69,7 +69,7 @@ public class KakaoMSGService {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type","refresh_token");
         map.add("client_id",restApi);
-        map.add("refresh_token","1M1l8nM03xd3D2wso-tlpflmzdT5HzrXUS0KKiWRAAABjUQKnKjokopMIboAuA");
+        map.add("refresh_token","x7sWtJUD1PJkFRSUkYb70EN72gdu1lpflqcKKcjZAAABjoDx06bokopMIboAuA");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);

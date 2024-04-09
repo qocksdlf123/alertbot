@@ -46,7 +46,6 @@ public class UpbitParsingService {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         WebDriver driver = new ChromeDriver(options);
-
 //        // Upbit 공지사항 페이지 접속
         driver.get("https://upbit.com/service_center/notice");
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(60 * 1000));
@@ -86,6 +85,7 @@ public class UpbitParsingService {
 
         }
             // WebDriver 종료
-            driver.quit();
+        driver.quit();
+        driver.close();
     }
 }
